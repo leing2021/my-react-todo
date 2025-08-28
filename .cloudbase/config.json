@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "name": "my-react-todo",
+    "cloudPath": "/",
+    "localPath": "./dist"
+  }
+}
