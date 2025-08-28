@@ -11,16 +11,20 @@ body {
     flex-direction: row;
     justify-content: center;
     font-family: sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px;
 }
 
 .wrapper {
-    width: 450px;
+    width: 100%;
+    max-width: 450px;
     padding: 30px;
     background-color: #1a1a40;
     border-radius: 5px;
     margin-top: 20px;
     text-align: center;
-
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }   
 
 .create-form {
@@ -34,33 +38,417 @@ body {
 .create-form > input { 
     outline: none;
     border: none;
-    background-color:none;
+    background-color: white;
     color: black;
     width: 100%;
     height: 100%;
     padding-left: 20px;
+    font-size: 16px;
+}
+
+.create-form > input::placeholder {
+    color: #666;
 }
 
 .create-form > button { 
     border: none;
     background-color: #3b36cc;
     color: white;
+    min-width: 50px;
     width: 50px;
     height: 100%;
     cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.create-form > button:hover {
+    background-color: #2d28a3;
 }
 
 .todo {
     background-color: #3b36cc;
-    height: 40px;
+    min-height: 40px;
     padding: 0 10px;
     margin-top: 10px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    word-break: break-word;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.todo:hover {
+    background-color: #4a44e6;
+}
+
+.todo p {
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+    cursor: pointer;
+    flex: 1;
+    text-align: left;
+    color: white;
+}
+
+.todo p:hover {
+    opacity: 0.8;
 }
 .completed {
     opacity: 0.4;
     text-decoration: line-through 3px black;
+}
+
+.todo > div {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.todo svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+    opacity: 0.8;
+}
+
+.todo svg:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* 统计信息样式 */
+.stats {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(59, 54, 204, 0.3);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.stats p {
+    margin: 0;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+/* 清空所有按钮容器 */
+.clear-all-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* 清空所有按钮样式 */
+.clear-all-btn {
+    border: none;
+    background-color: #ff4757;
+    color: white;
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.clear-all-btn:hover {
+    background-color: #ff3838;
+}
+
+/* 空状态提示样式 */
+.empty-message {
+    margin: 20px 0;
+    color: #888;
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* 设备类型特定样式 */
+.wrapper.device-desktop {
+    /* 桌面端优化 */
+    transition: all 0.3s ease;
+}
+
+.wrapper.device-tablet {
+    /* 平板端优化 */
+    border-radius: 8px;
+}
+
+.wrapper.device-mobile {
+    /* 手机端优化 */
+    border-radius: 12px;
+    margin-top: 5px;
+}
+
+/* 触摸设备特定样式 */
+body.touch-device .create-form > button,
+body.touch-device .clear-all-btn {
+    min-height: 44px;
+}
+
+body.touch-device .todo {
+    min-height: 48px;
+}
+
+/* 非触摸设备的悬停效果 */
+body:not(.touch-device) .create-form > button:hover,
+body:not(.touch-device) .clear-all-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== 响应式设计 ===== */
+
+/* 大屏幕桌面端 (1440px+) */
+@media (min-width: 1440px) {
+    .wrapper {
+        max-width: 700px;
+        padding: 50px;
+    }
+    
+    .wrapper h1 {
+        font-size: 36px;
+    }
+    
+    .create-form {
+        height: 55px;
+    }
+    
+    .create-form > input {
+        font-size: 20px;
+        padding-left: 30px;
+    }
+    
+    .create-form > button {
+        min-width: 90px;
+        width: 90px;
+        font-size: 18px;
+    }
+    
+    .todo {
+        min-height: 55px;
+        padding: 18px;
+    }
+    
+    .todo p {
+        font-size: 20px;
+    }
+    
+    .todo svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .clear-all-btn {
+        width: 140px;
+        height: 55px;
+        font-size: 18px;
+    }
+}
+
+/* 标准桌面端 (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .wrapper {
+        max-width: 650px;
+        padding: 45px;
+    }
+    
+    .wrapper h1 {
+        font-size: 34px;
+    }
+}
+
+/* 平板设备 (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .wrapper {
+        max-width: 550px;
+        padding: 35px;
+    }
+    
+    .wrapper h1 {
+        font-size: 28px;
+    }
+    
+    .create-form {
+        height: 48px;
+    }
+    
+    .create-form > input {
+        font-size: 17px;
+        padding-left: 20px;
+    }
+    
+    .create-form > button {
+        min-width: 75px;
+        width: 75px;
+        font-size: 15px;
+    }
+    
+    .todo {
+        min-height: 48px;
+        padding: 13px;
+    }
+    
+    .todo p {
+        font-size: 17px;
+    }
+    
+    .todo svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .clear-all-btn {
+        width: 110px;
+        height: 48px;
+        font-size: 15px;
+    }
+}
+
+/* 手机设备 (320px - 767px) */
+@media (max-width: 767px) {
+    body {
+        padding: 5px;
+    }
+    
+    .wrapper {
+        max-width: 100%;
+        padding: 20px 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+    
+    .wrapper h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    
+    .create-form {
+        height: 48px;
+        margin: 20px 0;
+    }
+    
+    .create-form > input {
+        padding-left: 15px;
+        font-size: 16px;
+    }
+    
+    .create-form > button {
+        min-width: 70px;
+        width: 70px;
+        font-size: 12px;
+    }
+    
+    .todo {
+        min-height: 48px;
+        padding: 12px;
+        margin-top: 12px;
+    }
+    
+    .todo p {
+        font-size: 16px;
+        line-height: 1.4;
+        flex: 1;
+        text-align: left;
+        margin-right: 10px;
+    }
+    
+    .todo > div {
+        display: flex;
+        gap: 15px;
+        flex-shrink: 0;
+    }
+    
+    .todo svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .stats {
+        padding: 12px;
+        margin: 20px 0;
+    }
+    
+    .stats p {
+        font-size: 16px;
+    }
+    
+    .clear-all-container {
+        margin-top: 25px;
+    }
+    
+    .clear-all-btn {
+        width: 100px;
+        height: 48px;
+        font-size: 16px;
+    }
+    
+    .empty-message {
+        font-size: 16px;
+        margin: 30px 0;
+    }
+}
+
+/* 小屏手机设备 (320px - 479px) */
+@media (max-width: 479px) {
+    .wrapper {
+        padding: 15px 10px;
+    }
+    
+    .wrapper h1 {
+        font-size: 20px;
+    }
+    
+    .create-form {
+        height: 44px;
+    }
+    
+    .create-form > input {
+        padding-left: 12px;
+        font-size: 16px;
+    }
+    
+    .create-form > button {
+        min-width: 60px;
+        width: 60px;
+        font-size: 11px;
+    }
+    
+    .todo {
+        padding: 10px;
+    }
+    
+    .todo p {
+        font-size: 14px;
+    }
+    
+    .todo svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .clear-all-btn {
+        width: 90px;
+        height: 44px;
+        font-size: 14px;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .create-form > button,
+    .clear-all-btn,
+    .todo svg {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .todo {
+        min-height: 52px;
+    }
 }
